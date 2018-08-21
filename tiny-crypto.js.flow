@@ -5,7 +5,7 @@
 const crypto = require('crypto')
 const algorithm = 'aes-256-ctr'
 
-export default class TinyCrypto {
+class TinyCrypto {
   constructor(secret /*: string*/) {
     if (!secret || typeof secret !== 'string') {
       throw new Error('TinyCrypto: secret must be a non-0-length string')
@@ -51,3 +51,5 @@ export default class TinyCrypto {
     return decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8')
   }
 }
+
+module.exports = TinyCrypto
