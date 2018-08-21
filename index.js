@@ -1,0 +1,53 @@
+// @flow
+// Modernized https://github.com/MauriceButler/cryptr
+// ⚠️ Node only
+
+const crypto = require('crypto')
+const algorithm = 'aes-256-ctr'
+
+export default class SimpleCrypto {
+  constructor(secret /*: string*/) {
+    if (!secret || typeof secret !== 'string') {
+      throw new Error('Simple Crypto: secret must be a non-0-length string')
+    }
+
+    this.key /*: Buffer*/ = crypto
+      .createHash('sha256')
+      .update(String(secret))
+      .digest()
+  }
+
+  /*::
+  key: Buffer
+  */
+
+  encrypt(value /*: string*/) /*:string*/ {
+    if (value == null) {
+      throw new Error('Simple Crypto: Value must not be null or undefined')
+    }
+
+    const iv = crypto
+      .randomBytes(16)
+      .toString('hex')
+      .slice(0, 16)
+
+    const cipher = crypto.createCipheriv(algorithm, this.key, iv)
+    const encrypted =
+      cipher.update(String(value), 'utf8', 'hex') + cipher.final('hex')
+
+    return iv + encrypted
+  }
+
+  decrypt(value /*: string*/) /*:string*/ {
+    if (value == null) {
+      throw new Error('Simple Crypto: Value must not be null or undefined')
+    }
+
+    const stringValue = String(value)
+    const iv = stringValue.slice(0, 16)
+    const encrypted = stringValue.slice(16)
+    const decipher = crypto.createDecipheriv(algorithm, this.key, iv)
+
+    return decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8')
+  }
+}

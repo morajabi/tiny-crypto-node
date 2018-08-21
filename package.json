@@ -1,0 +1,20 @@
+{
+  "name": "simple-crypto-node",
+  "version": "1.0.0",
+  "description": "🔑 Encrypt / decrypt strings (access tokens, names, secret IDs, etc) with a secret key for node",
+  "main": "dist/simple-crypto-node.js",
+  "umd:main": "dist/simple-crypto-node.umd.js",
+  "module": "dist/simple-crypto-node.m.js",
+  "source": "index.js",
+  "scripts": {
+    "build": "microbundle --output dist",
+    "dev": "microbundle watch"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.79.1",
+    "microbundle": "^0.6.0"
+  },
+  "repository": "https://github.com/morajabi/simple-crypto-node",
+  "author": "Mo Rajabifard <mo.rajbi@gmail.com> (https://morajabi.im/)",
+  "license": "MIT"
+}
