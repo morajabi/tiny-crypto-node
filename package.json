@@ -1,6 +1,6 @@
 {
   "name": "simple-crypto-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "🔑 Encrypt / decrypt strings (access tokens, names, secret IDs, etc) with a secret key for node",
   "main": "dist/simple-crypto-node.js",
   "umd:main": "dist/simple-crypto-node.umd.js",
